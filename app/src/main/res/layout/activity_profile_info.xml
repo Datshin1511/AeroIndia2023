@@ -77,7 +77,6 @@
                 tools:layout_editor_absoluteX="111dp"
                 tools:layout_editor_absoluteY="109dp" />
 
-
         </androidx.cardview.widget.CardView>
 
         <TextView

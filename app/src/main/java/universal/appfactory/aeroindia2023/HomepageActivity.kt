@@ -17,8 +17,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.setPadding
 import androidx.lifecycle.ViewModelProvider
-import com.onesignal.OSNotificationReceivedEvent
-import com.onesignal.OneSignal
 import kotlinx.android.synthetic.main.activity_agenda.*
 import kotlinx.android.synthetic.main.activity_homepage.*
 import universal.appfactory.aeroindia2023.agendas.AgendaActivity
@@ -53,6 +51,7 @@ class HomepageActivity : AppCompatActivity() {
     private lateinit var exhibitorViewModel: ExhibitorViewModel
     private lateinit var questionsViewModel: FaqsViewModel
     private lateinit var weatherViewModel: WeatherViewModel
+    private lateinit var viewModel: AgendaViewModel
     private lateinit var userType: String
     private lateinit var image: ImageView
     private lateinit var gridLayout1: GridLayout
@@ -397,6 +396,16 @@ class HomepageActivity : AppCompatActivity() {
 
             Log.i("Homepage activity message", "Homepage refreshed")
             Toast.makeText(this, "Page refreshed", Toast.LENGTH_SHORT).show()
+        }
+
+        // Fetching data from AgendaModel
+        var data: ArrayList<AgendaModel>
+        viewModel = AgendaViewModel()
+        viewModel.init(application)
+        viewModel.allagenda.observe(this){
+            data = it as ArrayList<AgendaModel>
+            if(data.size != 0)
+                Log.i("Time data: ", data[0].getStart_date_time())
         }
 
     }

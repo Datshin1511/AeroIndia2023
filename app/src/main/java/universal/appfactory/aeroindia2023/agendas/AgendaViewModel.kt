@@ -20,7 +20,6 @@ class AgendaViewModel : ViewModel() {
         allagenda = repository.getAllAgendas()
     }
 
-
     fun loadAllAgendas(reload: Boolean) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.loadAllAgendas(reload)

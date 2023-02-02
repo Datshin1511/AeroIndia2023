@@ -40,7 +40,7 @@ class AgendaRepository(application: Application) {
             GlobalScope.launch(Dispatchers.IO) {
                 val value = agendaApi.getAgendas("Bearer 61b25a411a2dad66bb7b6ff145db3c2f")
                     ?.awaitResponse()
-                val data = value?.body()?.data as List<AgendaModel>
+                val data: List<AgendaModel>? = value?.body()?.data as List<AgendaModel>
                 Log.d("Response: ", data.toString())
                 agendaDao.insertAll(data)
 
