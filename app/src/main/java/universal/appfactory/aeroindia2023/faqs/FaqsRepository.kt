@@ -38,7 +38,7 @@ class FaqsRepository(application: Application) {
             GlobalScope.launch(Dispatchers.IO) {
                 val value = faqApi.getFaqs("Bearer 61b25a411a2dad66bb7b6ff145db3c2f",userType.toInt())
                     ?.awaitResponse()
-                val data: List<FAQsModel>? = value?.body()?.data as List<FAQsModel>
+                val data: List<FAQsModel>? = value?.body()?.data
                 Log.d("Response :", data.toString())
                 faqDao.insertAll(data)
             }

@@ -17,6 +17,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.setPadding
 import androidx.lifecycle.ViewModelProvider
+import androidx.viewpager.widget.ViewPager
 import kotlinx.android.synthetic.main.activity_agenda.*
 import kotlinx.android.synthetic.main.activity_homepage.*
 import universal.appfactory.aeroindia2023.agendas.AgendaActivity
@@ -36,6 +37,7 @@ import universal.appfactory.aeroindia2023.speakers.SpeakersActivity
 import universal.appfactory.aeroindia2023.weather.WeatherActivity
 import universal.appfactory.aeroindia2023.weather.WeatherViewModel
 import universal.appfactory.aeroindia2023.agendas.*
+import java.time.LocalDateTime
 
 class HomepageActivity : AppCompatActivity() {
 
@@ -73,6 +75,8 @@ class HomepageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_homepage)
 
+        Log.i("Homepage msg", "In homepage")
+
         supportActionBar?.hide()
 
         navigableBundle = intent.extras!!
@@ -92,6 +96,10 @@ class HomepageActivity : AppCompatActivity() {
         Log.i("Homepage activity msg", "User type: $userType")
 
         //Dynamic gridLayout generated
+        val viewPager = findViewById<ViewPager>(R.id.pager)
+
+        val ll1: LinearLayout? = findViewById(R.id.gridLL1)
+        val ll2: LinearLayout? = findViewById(R.id.gridLL2)
 
         gridLayout1 = GridLayout(this)
         gridLayout1.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
@@ -111,10 +119,11 @@ class HomepageActivity : AppCompatActivity() {
         gridLayout3.columnCount = 3
         gridLayout3.rowCount = 3
 
+        ll1?.addView(gridLayout1)
+        ll2?.addView(gridLayout2)
+
         when(userType){
             "1" -> {
-                findViewById<LinearLayout>(R.id.hsvLinearLayout).addView(gridLayout1)
-                findViewById<LinearLayout>(R.id.hsvLinearLayout).addView(gridLayout2)
 
                 hashMap["1"] = AgendaActivity::class.java
                 hashMap["2"] = SpeakersActivity::class.java
@@ -152,12 +161,15 @@ class HomepageActivity : AppCompatActivity() {
                     else
                         gridLayout2.addView(image)
                 }
+
+                ll1?.addView(gridLayout1)
+                ll2?.addView(gridLayout2)
             }
 
             "2" -> {
 
-                findViewById<LinearLayout>(R.id.hsvLinearLayout).addView(gridLayout1)
-                findViewById<LinearLayout>(R.id.hsvLinearLayout).addView(gridLayout2)
+                ll1?.addView(gridLayout1)
+                ll2?.addView(gridLayout2)
 
                 hashMap["1"] = DelegateVehicleActivity::class.java
                 hashMap["2"] = DelegateHotelActivity::class.java
@@ -214,8 +226,8 @@ class HomepageActivity : AppCompatActivity() {
 
             "3" -> {
 
-                findViewById<LinearLayout>(R.id.hsvLinearLayout).addView(gridLayout1)
-                findViewById<LinearLayout>(R.id.hsvLinearLayout).addView(gridLayout2)
+                ll1?.addView(gridLayout1)
+                ll2?.addView(gridLayout2)
 
                 hashMap["1"] = VehicleActivity::class.java
                 hashMap["2"] = HotelActivity::class.java
@@ -272,8 +284,8 @@ class HomepageActivity : AppCompatActivity() {
 
             "4" -> {
 
-                findViewById<LinearLayout>(R.id.hsvLinearLayout).addView(gridLayout1)
-                findViewById<LinearLayout>(R.id.hsvLinearLayout).addView(gridLayout2)
+                ll1?.addView(gridLayout1)
+                ll2?.addView(gridLayout2)
 
                 hashMap["1"] = AgendaActivity::class.java
                 hashMap["2"] = SpeakersActivity::class.java
@@ -319,8 +331,8 @@ class HomepageActivity : AppCompatActivity() {
 
             "5" -> {
 
-                findViewById<LinearLayout>(R.id.hsvLinearLayout).addView(gridLayout1)
-                findViewById<LinearLayout>(R.id.hsvLinearLayout).addView(gridLayout2)
+                ll1?.addView(gridLayout1)
+                ll2?.addView(gridLayout2)
 
                 hashMap["1"] = AgendaActivity::class.java
                 hashMap["2"] = SpeakersActivity::class.java
@@ -367,6 +379,8 @@ class HomepageActivity : AppCompatActivity() {
             else -> Log.i("Homepage Activity", "User type not defined")
         }
 
+        viewPager.adapter = PageAdapter(supportFragmentManager, 2)
+
         findViewById<LinearLayout>(R.id.profileView).setOnClickListener{
             intent = Intent(this@HomepageActivity, ProfileActivity::class.java)
             intent.putExtras(navigableBundle)
@@ -404,8 +418,10 @@ class HomepageActivity : AppCompatActivity() {
         viewModel.init(application)
         viewModel.allagenda.observe(this){
             data = it as ArrayList<AgendaModel>
-            if(data.size != 0)
-                Log.i("Time data: ", data[0].getStart_date_time())
+            if(data.size != 0) {
+                Log.i("Agenda time data: ", data[0].getStart_date_time())
+                Log.i("Current time data: ", LocalDateTime.now().toString())
+            }
         }
 
     }

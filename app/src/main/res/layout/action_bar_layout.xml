@@ -13,13 +13,16 @@
         android:background="@color/light_navy_blue"
         android:orientation="horizontal">
 
-        <ImageView
+        <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:text="Smart City Dashboard"
+            android:textAllCaps="true"
+            android:textStyle="bold"
+            android:textColor="@color/white"
             android:foregroundGravity="center_vertical|center_horizontal"
-            android:layout_gravity="center"
-            android:background="@drawable/action_bar_light"/>
+            android:layout_gravity="center" />
 
     </LinearLayout>
 

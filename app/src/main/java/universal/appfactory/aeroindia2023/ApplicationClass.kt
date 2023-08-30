@@ -16,9 +16,6 @@ class ApplicationClass: Application() {
 
         OneSignal.setLogLevel(OneSignal.LOG_LEVEL.VERBOSE, OneSignal.LOG_LEVEL.NONE)
 
-        StrictMode.setThreadPolicy(ThreadPolicy.Builder().detectAll().build())
-        StrictMode.setVmPolicy(VmPolicy.Builder().detectAll().build())
-
         OneSignal.setNotificationWillShowInForegroundHandler {
             Log.e("OneSignal onHold msg", "Title: " + it.notification.title.toString())
             Log.e("OneSignal onHold msg", "Body: " + it.notification.body.toString())

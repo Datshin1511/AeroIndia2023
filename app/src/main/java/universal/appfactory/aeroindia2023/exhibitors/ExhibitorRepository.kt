@@ -39,7 +39,7 @@ class ExhibitorRepository(application: Application) {
             GlobalScope.launch(Dispatchers.IO) {
                 val value = exhibitorApi.getExhibitors("Bearer 61b25a411a2dad66bb7b6ff145db3c2f")
                     ?.awaitResponse()
-                val data: List<ExhibitorModel>? = value?.body()?.data as List<ExhibitorModel>
+                val data: List<ExhibitorModel>? = value?.body()?.data
                 Log.d("Response: ", data.toString())
                 exhibitorDao.insertAll(data)
 

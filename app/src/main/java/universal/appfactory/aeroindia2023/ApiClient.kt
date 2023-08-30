@@ -11,7 +11,6 @@ object ApiClient {
 
     private const val baseUrl = "http://aeroindia.gov.in/"
     private const val weatherUrl = "http://api.weatherbit.io/v2.0/"
-    private const val notificationUrl = "https://onesignal.com/api/v1/"
 
     var okHttpClient = OkHttpClient().newBuilder()
         .connectTimeout(60, TimeUnit.SECONDS) // was 60 seconds

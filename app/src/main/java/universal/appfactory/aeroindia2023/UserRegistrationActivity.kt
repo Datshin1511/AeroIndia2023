@@ -15,9 +15,6 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-
-// API_1: http://aeroindia.gov.in/api/register-user
-// API_2: http://aeroindia.gov.in/api/register-verify
 // Bearer token: 61b25a411a2dad66bb7b6ff145db3c2f
 
 class UserRegistrationActivity : AppCompatActivity() {
@@ -38,16 +35,6 @@ class UserRegistrationActivity : AppCompatActivity() {
         // Displays the Register activity
         setContentView(R.layout.activity_user_registration)
         val buttonId: Button = findViewById(R.id.registerButton)
-
-        // ArrayAdapter for user types
-//        val spinner = findViewById<Spinner>(R.id.spinner)
-//
-//        val userTypes = resources.getStringArray(R.array.user_types)
-//        val arrayAdapter = ArrayAdapter(this@UserRegistrationActivity, android.R.layout.simple_list_item_1, userTypes)
-//        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-//        spinner.adapter = arrayAdapter
-//
-//        val designation = spinner.selectedItem.toString()
 
         buttonId.setOnClickListener{
             val email = findViewById<EditText>(R.id.emailAddress).text.toString()
@@ -81,7 +68,6 @@ class UserRegistrationActivity : AppCompatActivity() {
     @OptIn(DelicateCoroutinesApi::class)
     fun submitUserData(email: String, username: String, mobileNo: String) {
         val userDataRequestModel = UserDataRequestModel(username, mobileNo, email)
-
 
         //Accessing API Interface for pushing user data
         val response = ServiceBuilder.buildService(ApiInterface::class.java)

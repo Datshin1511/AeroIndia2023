@@ -44,18 +44,19 @@ class UserLoginActivity : AppCompatActivity() {
 
         val sharedPreferences: SharedPreferences = getSharedPreferences("LocalUserData", MODE_PRIVATE)
 
-        if(sharedPreferences.getBoolean("loginStatus", false)) {
+        // True condition needs to be released
+        if(sharedPreferences.getBoolean("loginStatus", false) || true) {
 
-            navigableBundle.putString("name", sharedPreferences.getString("name", "-"))
-            navigableBundle.putString("email", sharedPreferences.getString("email", "-"))
-            navigableBundle.putString("phoneNo", sharedPreferences.getString("phoneNo", "-"))
-            navigableBundle.putString("designation", sharedPreferences.getString("designation", "-"))
-            navigableBundle.putString("userId", sharedPreferences.getString("userId", "-"))
-            navigableBundle.putString("foreignKeyId", sharedPreferences.getString("foreignKeyId", "-"))
+            navigableBundle.putString("name", sharedPreferences.getString("name", "Default name"))
+            navigableBundle.putString("email", sharedPreferences.getString("email", "defaultemail@dummy.com"))
+            navigableBundle.putString("phoneNo", sharedPreferences.getString("phoneNo", "1234567890"))
+            navigableBundle.putString("designation", sharedPreferences.getString("designation", "NA"))
+            navigableBundle.putString("userId", sharedPreferences.getString("userId", "1"))
+            navigableBundle.putString("foreignKeyId", sharedPreferences.getString("foreignKeyId", "1"))
             navigableBundle.putString("userType", sharedPreferences.getString("userType", "-"))
-            navigableBundle.putString("organisation", sharedPreferences.getString("organisation", "-"))
+            navigableBundle.putString("organisation", sharedPreferences.getString("organisation", "1"))
             navigableBundle.putString("profileImage", sharedPreferences.getString("profileImage", "-"))
-            navigableBundle.putString("address", sharedPreferences.getString("address", "-"))
+            navigableBundle.putString("address", sharedPreferences.getString("address", "Dummy address"))
 
             backpress=0
             intent = Intent(this@UserLoginActivity, HomepageActivity::class.java)

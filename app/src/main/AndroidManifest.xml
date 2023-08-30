@@ -345,7 +345,7 @@
             android:value="com.onesignal.NotificationServiceExtension" />
 
         <receiver
-            android:name=".NotificationServiceExtension"
+            android:name=".Notifications.NotificationServiceExtension"
             android:exported="true">
             <intent-filter>
                 <action android:name="com.onesignal.NotificationOpened.RECEIVE" />

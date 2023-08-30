@@ -40,7 +40,7 @@ class SpeakerRepository(application: Application) {
             GlobalScope.launch(Dispatchers.IO) {
                 val value = speakerApi.getSpeakers("Bearer 61b25a411a2dad66bb7b6ff145db3c2f")
                     ?.awaitResponse()
-                val data: List<SpeakerModel>? = value?.body()?.data as List<SpeakerModel>
+                val data: List<SpeakerModel>? = value?.body()?.data
                 Log.d("Response: ", data.toString())
                 speakerDao.insertAll(data)
             }

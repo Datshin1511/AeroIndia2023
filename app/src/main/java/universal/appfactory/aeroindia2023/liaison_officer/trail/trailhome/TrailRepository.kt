@@ -35,7 +35,7 @@ class TrailRepository(application: Application) {
             GlobalScope.launch(Dispatchers.IO) {
                 val value = liaisonApi.getTrail("Bearer 61b25a411a2dad66bb7b6ff145db3c2f")
                     ?.awaitResponse()
-                val data: List<TrailModel>? = value?.body()?.data!! as List<TrailModel>
+                val data: List<TrailModel>? = value?.body()?.data
                 Log.d("Response :", data.toString())
                 trailDao.insertAll(data)
             }
